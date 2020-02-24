@@ -1,0 +1,30 @@
+---
+title: "Murders Report"
+author: "Mubarraz Khan Zadran"
+date: "2/21/2020"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+This is a report of us gun murder rates obtained form FBI reports. The origional data was obtained from the following wikipedia pages{https://en.wikipedia.org/wiki/Murder_in_the_United_States_by_state}
+
+
+```{r loading libs, echo = FALSE}
+library(tidyverse)
+```
+Next, we load the data we already wrangled.
+```{r, }
+load ("rda/murders.rda", echo = FALSE)
+```
+Murder rate by state is explained in the following paragraph
+
+```{r plot, echo=FALSE}
+murders %>% mutate(abb = reorder(abb, rate)) %>%
+  ggplot(aes(abb, rate)) + 
+  geom_bar(width = 0.5, stat = "identity", color = "black")+
+  coord_flip()
+```
+
+I hope this results in a good clean, explainable report.
